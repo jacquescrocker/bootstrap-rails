@@ -1,0 +1,51 @@
+apps:
+  production: bootstrap
+  # staging: bootstrap-staging
+
+stacks:
+  all: cedar
+
+config:
+  all:
+    BUNDLE_WITHOUT: "test:development"
+    PATH: "vendor/bundle/ruby/1.9.1/bin:/usr/local/bin:/usr/bin:/bin:bin"
+  production:
+    BOOTSTRAP_PRODUCTION_URI: mongodb://path/to/production
+    RAILS_ENV: "production"
+  # staging:
+  #   BOOTSTRAP_STAGING_URI: mongodb://path/to/staging
+  #   RAILS_ENV: "staging"
+
+collaborators:
+  all:
+    # - "youremail@gmail.com"
+
+domains:
+  production:
+    # - "yourdomain.com"
+    # - "*.yourdomain.com"
+    # - "www.yourdomain.com"
+
+  # staging:
+  #   - "yourdomain.com"
+  #   - "*.yourdomain.com"
+  #   - "www.yourdomain.com"
+
+addons:
+  all:
+    - custom_domains:basic
+    - logging:expanded
+    # - custom_domains:wildcard
+    # - deployhooks:http
+
+  production:
+    - redistogo:nano
+    # - redistogo:mini
+    - sendgrid:starter
+    # - sendgrid:bronze
+    # - ssl:hostname
+
+  staging:
+    - redistogo:nano
+    - sendgrid:starter
+    # - ssl:hostname

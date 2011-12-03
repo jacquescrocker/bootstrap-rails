@@ -1,0 +1,8 @@
+# job_to_run:
+#   # this runs every minute
+#   cron: "* * * * *"
+#   class: JobToRun
+#   queue: somequeue
+#   description: "checks for something"
+#   args:
+#

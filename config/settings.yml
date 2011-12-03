@@ -1,0 +1,16 @@
+# rails configuration (you can override any of these in settings/[environment].yml)
+
+email_host: "localhost:3000"
+
+# default time_zone for new users
+default_time_zone: "Pacific Time (US & Canada)"
+
+redis_url: redis://localhost:6379/
+
+cookie:
+  key: '_bootstrap_session'
+  expire_in_days: 365
+
+# use this password to log into the resque adming (/resque)
+resque_server:
+  password: "bootstrap"

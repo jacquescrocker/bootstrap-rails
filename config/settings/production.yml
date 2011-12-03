@@ -1,0 +1,7 @@
+# uncomment these and set your domain
+# site_url: http://yourdomain.com
+# email_host: yourdomain.com
+
+
+# force all requests through your main domain
+# force_domain: yourdomain.com

@@ -1,0 +1,6 @@
+development: localhost:6379
+test: localhost:6379
+
+# set this env variable on production
+production: <%= ENV["BOOTSTRAP_PRODUCTION_REDIS_URL"] || ENV["REDISTOGO_URL"] %>
+staging: <%= ENV["BOOTSTRAP_STAGING_REDIS_URL"] || ENV["REDISTOGO_URL"] %>

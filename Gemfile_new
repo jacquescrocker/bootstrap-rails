@@ -1,15 +1,14 @@
 source 'http://rubygems.org'
 
-gem "sprockets", :git => "git://github.com/railsjedi/sprockets.git"
-
-gem "rake", "0.8.7"
+# gem "sprockets", :git => "git://github.com/railsjedi/sprockets.git", :ref => "fc79e12c7e8598a8d6bde6dbd8b08ab249674d3a"
 gem 'rails', '3.1.1'
+
+# Bundle edge Rails instead:
+# gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'json'
 gem 'jquery-rails'
 gem "bcrypt-ruby"
-gem "guid"
-gem "useragent"
 
 # rails config http://github.com/railsjedi/rails_config
 gem "rails_config", ">= 0.2.3"
@@ -29,10 +28,8 @@ gem "resque-scheduler"
 gem "rmagick"
 gem "sprite", ">= 0.2.5"
 
-# view helpers
-gem "viewfu", ">= 1.0.1"
-gem 'rack', '1.3.5'
-gem "rack-mobile-detect", :require => 'rack/mobile-detect'
+gem "thin"
+gem "unicorn"
 
 # more useful gems:
 # gem "stripe"          # billing
@@ -45,31 +42,22 @@ gem "rack-mobile-detect", :require => 'rack/mobile-detect'
 # gem "pusher"          # push notifications
 # gem "streama"         # activity feeds for mongoid
 # gem "kaminari"        # pagination library
-# gem "oauth2"          # oauth2 library
-# gem "twilio"          # telephony apis
-# gem "rdiscount"       # markdown rendering
-# gem "sanitize"        # sanitize html
-# gem "prawn"           # pdf generation
-# gem "slim"            # a better haml
 
-gem "thin"
-gem "unicorn"
-
+# Gems used only for assets and not required
+# in production environments by default.
 group :assets do
-  gem 'handlebars_assets'
+  # gem 'handlebars_assets'
 
   # stylus http://learnboost.github.com/stylus
   # nib http://visionmedia.github.com/nib/
-  gem "stylus-source", :git => "git://github.com/railsjedi/ruby-stylus-source.git"
-  gem "stylus", :git => "git://github.com/railsjedi/ruby-stylus.git"
-  gem "stylus-nib", :git => "git://github.com/railsjedi/ruby-stylus-nib.git"
+  # gem "stylus-source", :git => "git://github.com/railsjedi/ruby-stylus-source.git", :ref => "7680e4bfd73a49c77cf85d6b0e78e1385ff86f5e"
+  # gem "stylus", :git => "git://github.com/railsjedi/ruby-stylus.git", :ref => "934167413962b01dcdc07b1429fa8329e80bf874"
+  # gem "stylus-nib", :git => "git://github.com/railsjedi/ruby-stylus-nib.git", :ref => "ae6321e74d5576fb489db3999d73b152fcd8bdea"
 
-  gem 'execjs', :git => 'git://github.com/sstephenson/execjs.git'
+  # gem 'execjs', :git => 'git://github.com/sstephenson/execjs.git', :ref => "1c0af50e963f93a3a47241ca63e9b5110f9d694f"
 
-  gem "sass-rails"
-
-  gem "coffee-rails"
-  gem "uglifier"
+  gem 'coffee-rails', '~> 3.1.1'
+  gem 'uglifier', '>= 1.0.3'
   gem 'yui-compressor', :require => 'yui/compressor'
 end
 
@@ -79,7 +67,7 @@ group :development do
 
   # setup guard
   gem "guard"
-  gem "guard-pusher", :git => "http://github.com/railsjedi/guard-pusher.git"
+  gem "guard-pusher", :git => "http://github.com/railsjedi/guard-pusher.git", :ref => "ebd77b16078f9a994ef92500ec12ef841d954508"
   gem "guard-coffeescript", ">= 0.4.0"
   gem "guard-resque", ">= 0.0.2"
 
@@ -114,7 +102,8 @@ group :test do
   gem 'guard-cucumber'
 
   gem 'remarkable_mongoid'
-  gem 'cucumber-rails', '>= 1.0.2' # cannot run with capybara webkit due to dependency problems
+  gem 'cucumber-rails', '>= 1.0.2'
 
+  # Pretty printed test output
+  gem 'turn', '0.8.2', :require => false
 end
-

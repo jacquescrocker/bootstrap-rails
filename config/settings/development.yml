@@ -1,0 +1,11 @@
+site_url: http://localhost:3000
+email_host: localhost:3000
+
+# uncomment these lines to test the forcedomain
+# force_domain: "localhost:3000"
+# cookie:
+#   domain: "localhost"
+
+<% if ENV["DEV_RELOAD_CHANNEL"] %>
+dev_reload_channel: '<%= ENV["DEV_RELOAD_CHANNEL"] %>'
+<% end %>

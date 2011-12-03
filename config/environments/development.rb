@@ -26,5 +26,37 @@ Bootstrap::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  # config.assets.debug = true
+
+  # nice to have the logger just print to STDOUT
+  config.logger = Logger.new(STDOUT)
+
+  # save all incoming and outgoing requests
+  unless $DEPLOYING
+    require "vcr"
+    require "webmock"
+
+    # use vcr middleware
+    config.middleware.use "VCR::Middleware::Rack", do |cassette|
+      cassette.name "web"
+      cassette.options :record => :all
+    end
+
+    VCR.config do |c|
+      c.cassette_library_dir = 'tmp/vcr_cassettes'
+      c.allow_http_connections_when_no_cassette = true
+      c.stub_with :webmock # or :fakeweb
+    end
+  end
+
+  config.after_initialize do
+    # load fabricators
+    require "#{Rails.root}/lib/ext/mongo_ext"
+
+    Mongoid.database.profiling_level = :slow_only
+  end
+
+  # require fabricators
+  Dir["#{Rails.root}/db/fabricators/**.rb"].each {|f| require f}
+
 end

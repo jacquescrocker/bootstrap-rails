@@ -1,19 +1,50 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+require "action_controller/railtie"
+require "action_mailer/railtie"
 
-if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
+# If you have a Gemfile, require the gems listed there, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require *Rails.groups(:assets) if defined?(Bundler)
 
 module Bootstrap
   class Application < Rails::Application
+
+    # make sure the log directory is set up
+    puts `mkdir -p ./log`
+    puts `touch ./log/#{Rails.env}.log`
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    config.autoload_paths += %W(#{config.root}/app/jobs)
+    config.autoload_paths += %W(#{config.root}/app/bots)
+    config.autoload_paths += %W(#{config.root}/lib)
+
+    # removes mongo for heroku precompile
+    require "ext/precompile_hack"
+
+    # Enable the asset pipeline
+    config.assets.enabled = true
+    config.assets.precompile << '*.js'
+    config.assets.precompile << '*.css'
+
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
+
+    # disable mongoid preloading
+    config.mongoid.preload_models = false
+
+    # checks to see if we're on a mobile device
+    config.middleware.use "Rack::MobileDetect"
+    config.middleware.use "Rack::Deflater"
+
+    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
+    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
+    config.time_zone = Settings.default_time_zone
+
+    config.action_mailer.default_url_options = { :host => Settings.email_host }
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
@@ -37,12 +68,15 @@ module Bootstrap
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [:password, :password_confirmation, ]
 
-    # Enable the asset pipeline
-    config.assets.enabled = true
+    # configure generators for mongoid/rspec
+    config.generators do |g|
+      g.orm             :mongoid
+      g.test_framework  :rspec, :fixtures => true
+      g.integration_tool :rspec
+      g.fixture_replacement :fabrication, :dir => "db/fabricators"
+    end
 
-    # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
   end
 end

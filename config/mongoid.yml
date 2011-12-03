@@ -1,0 +1,25 @@
+options: &options
+  parameterize_keys: false
+  use_utc: true
+
+defaults: &defaults
+  host: localhost
+  # slaves:
+  #   - host: slave1.local
+  #     port: 27018
+  #   - host: slave2.local
+  #     port: 27019
+
+development:
+  <<: *defaults
+  <<: *options
+  database: bootstrap_dev
+
+test:
+  <<: *defaults
+  <<: *options
+  database: bootstrap_test
+
+production:
+  <<: *options
+  uri: <%= ENV['BOOTSTRAP_PRODUCTION_URI'] %>
