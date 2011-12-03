@@ -357,7 +357,7 @@ DEPENDENCIES
   bson_ext (= 1.4.0)
   capybara
   coffee-rails
-  cucumber-rails (>= 1.0.2)
+  cucumber-rails
   execjs!
   fabrication
   ffaker

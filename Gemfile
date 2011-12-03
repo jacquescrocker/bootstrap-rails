@@ -5,6 +5,10 @@ gem "sprockets", :git => "git://github.com/railsjedi/sprockets.git"
 gem "rake", "0.8.7"
 gem 'rails', '3.1.1'
 
+# setup rack
+gem 'rack', '1.3.5'
+gem "rack-mobile-detect", :require => 'rack/mobile-detect'
+
 gem 'json'
 gem 'jquery-rails'
 gem "bcrypt-ruby"
@@ -31,10 +35,8 @@ gem "sprite", ">= 0.2.5"
 
 # view helpers
 gem "viewfu", ">= 1.0.1"
-gem 'rack', '1.3.5'
-gem "rack-mobile-detect", :require => 'rack/mobile-detect'
 
-# more useful gems:
+# some useful gems:
 # gem "stripe"          # billing
 # gem "hirefireapp"     # autoscaling for heroku
 # gem "airbrake"        # exception handler
@@ -94,6 +96,7 @@ group :development, :test do
   gem "fabrication"
   gem 'ffaker'
   gem "rspec-rails", ">= 2.5.0"
+  gem 'cucumber-rails'
 
   gem "rb-fsevent"
   gem "growl"
@@ -114,7 +117,4 @@ group :test do
   gem 'guard-cucumber'
 
   gem 'remarkable_mongoid'
-  gem 'cucumber-rails', '>= 1.0.2' # cannot run with capybara webkit due to dependency problems
-
 end
-
