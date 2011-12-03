@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bootstrap</title>
+
+  <title><%= raw content_for?(:title) ? yield(:title) : "Bootstrap" %></title>
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <%= raw content_for?(:prehead) ? yield(:prehead) : "" %>
+
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= js_settings %>
+
+  <%= use_pusher if Rails.env.development? %>
+
+  <%= raw content_for?(:head) ? yield(:head) : "" %>
+
+  <!-- Le fav and touch icons -->
+  <link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png">
+
 </head>
-<body>
+<body id="<%= body_attrs[:id] %>" class="<%= body_attrs[:class] %>">
 
 <%= yield %>
 

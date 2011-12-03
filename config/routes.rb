@@ -1,6 +1,17 @@
 Bootstrap::Application.routes.draw do
   mount Bootstrap::ResqueServer.new, :at => "/resque"
 
+  # app routes here
+  # ...
+
+  root :to => 'pages#landing'
+
+  scope :module => "Templates" do
+    get "templates/bootstrap/:action" => "bootstrap"
+  end
+
+  # Reference
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
