@@ -10,10 +10,8 @@ config:
     BUNDLE_WITHOUT: "test:development"
     PATH: "vendor/bundle/ruby/1.9.1/bin:/usr/local/bin:/usr/bin:/bin:bin"
   production:
-    BOOTSTRAP_PRODUCTION_URI: mongodb://path/to/production
     RAILS_ENV: "production"
   # staging:
-  #   BOOTSTRAP_STAGING_URI: mongodb://path/to/staging
   #   RAILS_ENV: "staging"
 
 collaborators:

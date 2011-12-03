@@ -22,4 +22,4 @@ test:
 
 production:
   <<: *options
-  uri: <%= ENV['BOOTSTRAP_PRODUCTION_URI'] %>
+  uri: mongodb://path/to/mongo

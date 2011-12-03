@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   extend ActiveSupport::Memoizable
-  include Backend::ErrorHandlers
+  include Bootstrap::ErrorHandlers
 
   protect_from_forgery
 
